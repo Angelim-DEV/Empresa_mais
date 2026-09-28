@@ -1627,14 +1627,20 @@ select c.nome as cliente, p.id_pedido, pi.id_produto, pi.quantidade from cliente
 select c.nome as cliente, p.id_pedido, p.data_pedido, pi.id_produto, pi.quantidade from cliente c inner join pedido p on c.id_cliente = p.id_cliente inner join pedido_item pi on p.id_pedido = pi.id_pedido where c.ativo = 1 and p.data_pedido between '2026-01-01' and '2026-12-31';
 
 -- exercício 36
-select c.nome as cliente, p.data_pedido, prod.nome as produto, pi.quantidade, pi.preco_unitario from cliente c inner join pedido p on c.id_cliente = p.id_cliente inner join pedido_item pi on p.id_pedido = pi.id_pedido inner join produto prod on pi.id_produto = prod.id_produto;
+select c.nome as cliente, p.data_pedido, prod.nome as produto, pi.quantidade, pi.preco_unitario 
+from cliente c inner join pedido p on c.id_cliente = p.id_cliente inner join pedido_item pi on p.id_pedido = pi.id_pedido inner join produto prod on pi.id_produto = prod.id_produto;
 
-select c.nome as cliente, p.data_pedido, prod.nome as produto, pi.quantidade, pi.preco_unitario from cliente c inner join pedido p on c.id_cliente = p.id_cliente inner join pedido_item pi on p.id_pedido = pi.id_pedido inner join produto prod on pi.id_produto = prod.id_produto where pi.quantidade > 1 and pi.preco_unitario > 500;
+select c.nome as cliente, p.data_pedido, prod.nome as produto, pi.quantidade, pi.preco_unitario 
+from cliente c inner join pedido p on c.id_cliente = p.id_cliente inner join pedido_item pi on p.id_pedido = pi.id_pedido inner join produto prod on pi.id_produto = prod.id_produto 
+where pi.quantidade > 1 and pi.preco_unitario > 500;
 
 -- exercício 37
-select prod.nome as produto, prod.preco, prod.estoque, cat.nome from produto prod inner join categoria cat on prod.id_categoria = cat.id_categoria;
+select prod.nome as produto, prod.preco, prod.estoque, cat.nome 
+from produto prod inner join categoria cat on prod.id_categoria = cat.id_categoria;
 
-select prod.nome as produto, prod.preco, prod.estoque, cat.nome from produto prod inner join categoria cat on prod.id_categoria = cat.id_categoria where cat.nome in ("software","segurança","energia");
+select prod.nome as produto, prod.preco, prod.estoque, cat.nome 
+from produto prod inner join categoria cat on prod.id_categoria = cat.id_categoria 
+where cat.nome in ("software","segurança","energia");
 
 -- exercício 38
 select c.nome as cliente, p.data_pedido, prod.nome as produto, cat.nome as categoria, pi.quantidade, pi.preco_unitario from cliente c inner join pedido p on c.id_cliente = p.id_cliente inner join pedido_item pi on p.id_pedido = pi.id_pedido inner join produto prod on pi.id_produto = prod.id_produto inner join categoria cat on prod.id_categoria = cat.id_categoria order by cat.nome;
@@ -1642,11 +1648,19 @@ select c.nome as cliente, p.data_pedido, prod.nome as produto, cat.nome as categ
 select c.nome as cliente, p.data_pedido, prod.nome as produto, cat.nome as categoria, pi.quantidade, pi.preco_unitario from cliente c inner join pedido p on c.id_cliente = p.id_cliente inner join pedido_item pi on p.id_pedido = pi.id_pedido inner join produto prod on pi.id_produto = prod.id_produto inner join categoria cat on prod.id_categoria = cat.id_categoria where cat.nome in ("monitores","software","fotografia");
 
 -- exercício 39
-select c.id_cliente, c.nome, c.email from cliente c left join pedido p on c.id_cliente = p.id_cliente where p.id_pedido is null;
+select c.id_cliente, c.nome, c.email 
+from cliente c left join pedido p on c.id_cliente = p.id_cliente 
+where p.id_pedido is null;
 
-select cat.id_categoria, cat.nome from categoria cat left join produto prod on cat.id_categoria = prod.id_categoria where prod.id_produto is null;
+select cat.id_categoria, cat.nome 
+from categoria cat left join produto prod on cat.id_categoria = prod.id_categoria 
+where prod.id_produto is null;
 
 -- exercício 40
-select c.nome as cliente, p.id_pedido, p.data_pedido, prod.nome as produto, cat.nome as categoria, pi.quantidade, pi.preco_unitario from cliente c inner join pedido p on c.id_cliente = p.id_cliente inner join pedido_item pi on p.id_pedido = pi.id_pedido inner join produto prod on pi.id_produto = prod.id_produto inner join categoria cat on prod.id_categoria = cat.id_categoria order by p.data_pedido DESC limit 50;
+select c.nome as cliente, p.id_pedido, p.data_pedido, prod.nome as produto, cat.nome as categoria, pi.quantidade, pi.preco_unitario 
+from cliente c inner join pedido p on c.id_cliente = p.id_cliente inner join pedido_item pi on p.id_pedido = pi.id_pedido inner join produto prod on pi.id_produto = prod.id_produto inner join categoria cat on prod.id_categoria = cat.id_categoria
+order by p.data_pedido DESC limit 50;
 
-select c.id_cliente, c.nome as cliente, p.id_pedido from cliente c left join pedido p on c.id_cliente = p.id_cliente union select c.id_cliente, c.nome as cliente, p.id_pedido from pedido p right join cliente c on c.id_cliente = p.id_cliente;
+select c.id_cliente, c.nome as cliente, p.id_pedido 
+from cliente c left join pedido p on c.id_cliente = p.id_cliente union select c.id_cliente, c.nome as cliente, p.id_pedido
+from pedido p right join cliente c on c.id_cliente = p.id_cliente;
